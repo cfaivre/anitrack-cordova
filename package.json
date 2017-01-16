@@ -1,0 +1,14 @@
+{
+  "name": "anitracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node install.js",
+    "build:android": "cordova build android && cp -R ./platforms/android/build/outputs/apk/* ./builds",
+    "build:ios": "cordova build ios"
+  },
+  "author": "",
+  "license": "ISC"
+}
