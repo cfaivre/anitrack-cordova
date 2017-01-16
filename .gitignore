@@ -1,5 +1,5 @@
 platforms/*/*
 plugins/*/*
-builds/*
+builds/*.apk
 
 .DS_Store
