@@ -1,106 +1,116 @@
 <!DOCTYPE html>
 <!--
-	Licensed to the Apache Software Foundation (ASF) under one
-	or more contributor license agreements.  See the NOTICE file
-	distributed with this work for additional information
-	regarding copyright ownership.  The ASF licenses this file
-	to you under the Apache License, Version 2.0 (the
-	"License"); you may not use this file except in compliance
-	with the License.  You may obtain a copy of the License at
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
 
-	http://www.apache.org/licenses/LICENSE-2.0
+  http://www.apache.org/licenses/LICENSE-2.0
 
-	Unless required by applicable law or agreed to in writing,
-	software distributed under the License is distributed on an
-	"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-	 KIND, either express or implied.  See the License for the
-	specific language governing permissions and limitations
-	under the License.
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
 -->
 <html>
-	<head>
-		<!--
-		Customize this policy to fit your own app's needs. For more guidance, see:
-			https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-		Some notes:
-			* gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-			* https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-			* Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-				* Enable inline JS: add 'unsafe-inline' to default-src
-		-->
-		<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
-		<meta name="format-detection" content="telephone=no">
-		<meta name="msapplication-tap-highlight" content="no">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-		<!-- <link rel="stylesheet" type="text/css" href="css/index.css"> -->
-		<title>Hello World</title>
-		<style>
-			body {
-				margin: 0;
-				padding: 0;
-				min-height: 100vh;
-			}
-			.app {
-				margin: 2rem;
-			}
-			.app * {
-				display: block;
-				box-sizing: border-box;
-			}
-			.app > button {
-				padding: 0.5rem 1rem;
-			}
-			.app > p {
-				margin-top: 1rem;
-				font-size: 16px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="app">
-			<button id="btnScan">Scan</button>
-			<p id="lblData"></p>
-			<p id="lblFormat"></p>
-		</div>
-		<script type="text/javascript" src="cordova.js"></script>
-		<!-- <script type="text/javascript" src="js/index.js"></script> -->
-		<script type="text/javascript">
-			(function() {
+  <head>
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+      https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+      * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+      * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+      * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!-- <link rel="stylesheet" type="text/css" href="css/index.css"> -->
+    <title>Hello World</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+      }
+      .app {
+        margin: 2rem;
+      }
+      .app * {
+        display: block;
+        box-sizing: border-box;
+      }
+      .app > button {
+        padding: 0.5rem 1rem;
+      }
+      .app > p {
+        margin-top: 1rem;
+        font-size: 16px;
+      }
+    </style>
+    <script type="text/javascript">
+    	(function() {
+        window.addEventListener('error', function(error) {
+          if (!error) return;
+          var lblError = document.querySelector('#lblError');
+          lblError.innerHTML = error.message || 'Unknown error';
+        });
+      }());
+    </script>
+  </head>
+  <body>
+    <div class="app">
+      <button id="btnScan">Scan</button>
+      <p id="lblData"></p>
+      <p id="lblFormat"></p>
+      <p id="lblError"></p>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <!-- <script type="text/javascript" src="js/index.js"></script> -->
+    <script type="text/javascript">
+      (function() {
 
-				var btnScan = document.querySelector('#btnScan');
-				btnScan.addEventListener('click', attemptScan);
+        var btnScan = document.querySelector('#btnScan');
+        btnScan.addEventListener('click', attemptScan);
 
-				var lblData = document.querySelector('#lblData');
-				var lblFormat = document.querySelector('#lblFormat');
+        var lblData = document.querySelector('#lblData');
+        var lblFormat = document.querySelector('#lblFormat');
 
-				function attemptScan() {
+        function attemptScan() {
 
-					console.log('attemptScan');
-					var scan = cordova.plugins.barcodeScanner.scan;
-					var notify = navigator.notification.prompt;
-					var vibrate = navigator.vibrate;
+          console.log('attemptScan');
+          var scan = cordova.plugins.barcodeScanner.scan;
+          var notify = navigator.notification.prompt;
+          var vibrate = navigator.vibrate;
 
-					var options = {
-						showFlipCameraButton : true,
-						showTorchButton : true,
-						resultDisplayDuration: 1,
-						prompt : "Place a tag inside the scan area",
-						formats : "DATA_MATRIX"
-					};
+          var options = {
+            showFlipCameraButton : true,
+            showTorchButton : true,
+            resultDisplayDuration: 1,
+            prompt : "Place a tag inside the scan area",
+            formats : "DATA_MATRIX"
+          };
 
-					scan(function(result) {
-						console.log('scan', result);
-						if (result.cancelled) return;
-						lblData.innerHTML = result.text || null;
-						lblFormat.innerHTML = result.format || null;
-						vibrate(300);
-					}, function(error) {
-						console.error(error);
-					}, options);
+          scan(function(result) {
+            console.log('scan', result);
+            if (result.cancelled) return;
+            lblData.innerHTML = result.text || null;
+            lblFormat.innerHTML = result.format || null;
+            vibrate(300);
+          }, function(error) {
+            console.error(error);
+          }, options);
 
-				}
+        }
 
-			}());
-		</script>
-	</body>
+      }());
+    </script>
+  </body>
 </html>
