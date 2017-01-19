@@ -30,3 +30,7 @@ npm run build:android
 ```bash
 npm run build:ios
 ```
+
+### iOS build requirements
+
+Get a [developer ID](https://developer.apple.com/account/#/membership) and a [provisioning GUID](https://developer.apple.com/ios/manage/overview/index.action) from the iOS portal and add both to the `build.json` file in the root dir.
