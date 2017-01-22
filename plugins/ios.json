@@ -7,23 +7,14 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.anitracker"
-        },
         "phonegap-plugin-barcodescanner": {
             "CAMERA_USAGE_DESCRIPTION": " ",
-            "PACKAGE_NAME": "com.anitracker"
-        },
-        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.anitracker"
         },
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "com.anitracker"
         },
         "cordova-plugin-vibration": {
-            "PACKAGE_NAME": "com.anitracker"
-        },
-        "cordova-plugin-compat": {
             "PACKAGE_NAME": "com.anitracker"
         }
     },

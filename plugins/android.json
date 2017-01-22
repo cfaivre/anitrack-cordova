@@ -7,13 +7,7 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.anitracker"
-        },
         "phonegap-plugin-barcodescanner": {
-            "PACKAGE_NAME": "com.anitracker"
-        },
-        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.anitracker"
         },
         "cordova-plugin-dialogs": {
