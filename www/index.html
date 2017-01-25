@@ -41,7 +41,7 @@
         
         <div display="events">
           Events
-          <div class="template" as="event">
+          <div class="template">
             <div attr="_id">
               <div content="_id"></div>
               <div content="status"></div>
@@ -51,7 +51,23 @@
         </div>
 
         <div display="event_details">
-          event_details
+
+          <div class="details">
+            <div content="_id"></div>
+            <div content="tag_number"></div>
+            <div content="status"></div>
+          </div>
+
+          <div class="list animals"></div>
+
+          <div class="template">
+            <div attr="_id">
+              <div content="_id"></div>
+              <div content="tag_number"></div>
+              <div content="status"></div>
+            </div>
+          </div>
+
         </div>
 
         <div display="event_create">
@@ -59,9 +75,8 @@
         </div>
 
         <div display="animals">
-          animals
           <div class="template">
-            <div attr="_id">
+            <div attr="_id" onclick="app.clickedAnimal(this)">
               <div content="_id"></div>
               <div content="tag_number"></div>
               <div content="status"></div>
@@ -70,7 +85,24 @@
         </div>
 
         <div display="animal_details">
-          animal_details
+
+          <div class="details">
+            <div content="tag_number"></div>
+            <div content="status"></div>
+            <div content="date_of_birth"></div>
+          </div>
+
+          <div class="list events"></div>
+
+          <div class="template">
+            <div attr="_id">
+              <div content="jobtype"></div>
+              <div content="description"></div>
+              <div content="status"></div>
+              <div content="created_at"></div>
+            </div>
+          </div>
+
         </div>
 
       </section>
