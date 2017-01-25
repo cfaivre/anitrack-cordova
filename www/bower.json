@@ -13,8 +13,6 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer#^1.7.1",
-    "webcomponentsjs": "^0.7.23",
-    "app-layout": "PolymerElements/app-layout#^0.10.6"
+    "milligram": "^1.2.4"
   }
 }
