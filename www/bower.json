@@ -13,6 +13,6 @@
     "tests"
   ],
   "dependencies": {
-    "milligram": "^1.2.4"
+
   }
 }

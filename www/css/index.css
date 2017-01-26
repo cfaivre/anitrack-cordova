@@ -1,115 +1,238 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+  /*-webkit-tap-highlight-color: rgba(0,0,0,0);*/
 }
+
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0; }
 
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #A7A7A7),
-        color-stop(0.51, #E4E4E4)
-    );
-    background-attachment:fixed;
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:12px;
-    height:100%;
-    margin:0px;
-    padding:0px;
-    text-transform:uppercase;
-    width:100%;
+  -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+  background-attachment: fixed;
+  /*font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;*/
+  font-family: 'Roboto', 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
-/* Portrait layout (default) */
-.app {
-    /*background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */*/
-    position:absolute;             /* position in the center of the screen */
-    left:50%;
-    top:50%;
-    height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
-    text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
-                                   /* offset horizontal: half of text area width */
+body * {
+  box-sizing: inherit;
 }
 
-/* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .app {
-        background-position:left center;
-        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
-        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
-    }
+*,
+*:before,
+*:after {
+  box-sizing: inherit; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  line-height: 1.6875rem;
+  font-weight: 400; }
+
+h1,
+.h1 {
+  font-size: 2rem; }
+
+h2,
+.h2 {
+  font-size: 1.5625rem; }
+
+h3,
+.h3 {
+  font-size: 1.25rem; }
+
+h4,
+.h4 {
+  font-size: 1rem; }
+
+h5,
+.h5 {
+  font-size: 0.8125; }
+
+p {
+  margin-bottom: 1.3rem;
+  line-height: 1.6875rem; }
+
+ul, li {
+  list-style: none;
 }
 
-h1 {
-    font-size:24px;
-    font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
+#app-bar {
+  height: auto;
+  background-color: #3747C3;
+  color: #fff;
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  box-shadow: 0 -4px 20px rgba(0,0,0,.8);
 }
 
-.event {
-    border-radius:4px;
-    -webkit-border-radius:4px;
-    color:#FFFFFF;
-    font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
+#app-bar * {
+  position: relative;
+  display: inline-block;
 }
 
-.event.listening {
-    background-color:#333333;
-    display:block;
+#app-bar > .title-container {
+
 }
 
-.event.received {
-    background-color:#4B946A;
-    display:none;
+#app-bar > .title-container > i {
+  top: 7px;
+  padding-left: 1rem;
 }
 
-@keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
+#app-bar > .title-container > #title {
+  padding: 1rem 1rem;
 }
- 
-@-webkit-keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
+
+#app-bar > .tabs-container {
+  float: right;
+  padding: 1rem 1rem;
+  padding-bottom: 0;
 }
- 
-.blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
+
+#app-bar > .tabs-container > #tabs {
+  list-style: none;
+}
+
+#app-bar > .tabs-container > #tabs > li {
+  color: #D7D7D7;
+  margin-right: 1rem;
+  padding-bottom: 13px;
+}
+#app-bar > .tabs-container > #tabs > li:last-child {
+  padding-right: 0;
+}
+#app-bar > .tabs-container > #tabs > li.selected {
+  color: #fff;
+  border-bottom: 3px solid #fff;
+}
+#app-bar > .tabs-container > #tabs > li:active {
+  background-color: transparent;
+  outline: 0;
+}
+
+#content {
+  position: relative;
+}
+
+#content > *[display] {
+  display: none;
+}
+#content > *[display].selected {
+  display: block;
+}
+
+#content > *[display].listing {
+
+}
+
+#content > *[display].listing > .top {
+  padding: 1rem;
+  font-size: 12px;
+  color: #606060;
+  background-color: #f7f7f7;
+  margin-bottom: 1px;
+}
+
+#content > *[display].listing > .list {
+
+}
+
+#content > *[display].listing > .list > li {
+  /*border-left: 3px solid #EC3E17;*/
+  padding: 1rem;
+  padding-bottom: 0;
+  margin-bottom: 1px;
+  background-color: #fff;
+  transition: background-color 150ms ease-in-out;
+}
+
+#content > *[display].listing > .list > li:active {
+  background-color: #e4e4e4;
+}
+
+#content > *[display].listing > .list > li > div {
+  /*padding: 1rem;*/
+  padding-bottom: 1rem;
+  width: 100%;
+  display: inline-block;
+  border-bottom: 1px solid #efefef;
+}
+
+#content > *[display].listing > .list > li > div .left {
+  width: 50%;
+  float: left;
+}
+#content > *[display].listing > .list > li > div .right {
+  width: 50%;
+  float: left;
+  padding-right: 1rem;
+}
+
+#content > *[display].listing > .list > li > div .name {
+  font-weight: 700;
+  padding-bottom: 4px;
+}
+
+#content > *[display].listing > .list > li > div .description {
+  font-size: 12px;
+  color: #606060;
+}
+
+#content > *[display].listing > .list > li > div .status {
+  font-size: 12px;
+  color: #606060;
+  text-transform: uppercase;
+  padding-top: 6px;
+  padding-bottom: 4px;
+  text-align: end;
+}
+
+#content > *[display].listing > .list > li > div .time {
+  font-size: 12px;
+  color: #606060;
+  text-align: end;
 }

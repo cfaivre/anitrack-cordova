@@ -7,64 +7,81 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <!-- <link rel="stylesheet" type="text/css" href="css/index.css"> -->
     <title>AniTracker</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous"
+    ></script>
     <script type="text/javascript">
     	(function() {
         window.addEventListener('error', function(error) {
           if (!error) return;
           var lblError = document.querySelector('#lblError');
-          lblError.innerHTML = error.message || 'Unknown error';
+          lblError.innerHTML = error.message + ' (' + error.filename + ':' + error.lineno + ':' + error.colno + ')';
+          console.log(error);
         });
       }());
     </script>
   </head>
-  <body>
-
-    <style>
-      #content > * {
-        display: none;
-      }
-      #content > *.selected {
-        display: block;
-      }
-    </style>
+  <body ontouchstart="">
 
     <div id="app">
 
-      <div class="nav-container">
-        <nav id="tabs">
-          <li display="events" onclick="app.clickedTab(this)">Events</li>
-          <li display="animals" onclick="app.clickedTab(this)">Animals</li>
-        </nav>
+      <div id="app-bar">
+        <div class="title-container">
+          <!-- <i class="material-icons">keyboard_backspace</i> -->
+          <span id="title">AniTracker</span>
+        </div>
+        <div class="tabs-container">
+          <ul id="tabs">
+            <li display="events" onclick="app.clickedTab(this)">Events</li>
+            <li display="animals" onclick="app.clickedTab(this)">Animals</li>
+          </ul>
+        </div>
       </div>
       
       <section id="content">
         
-        <div display="events">
-          Events
-          <div class="template">
-            <div attr="_id">
-              <div content="_id"></div>
-              <div content="status"></div>
-              <div content="description"></div>
-            </div>
+        <div display="events" class="listing">
+          <div class="top">
+            All events
           </div>
+          <ul class="list">
+            
+          </ul>
+          <li class="template">
+            <div attr="_id" onclick="app.clickedEvent(this)">
+              <div class="left">
+                <div class="name" content="jobtype"></div>
+                <div class="description" content="description"></div>
+              </div>
+              <div class="right">
+                <div class="status" content="status"></div>
+                <div class="time" content="created_at"></div>
+              </div>
+            </div>
+          </li>
         </div>
 
         <div display="event_details">
 
           <div class="details">
-            <div content="_id"></div>
-            <div content="tag_number"></div>
+            <div content="jobtype"></div>
+            <div content="description"></div>
             <div content="status"></div>
+            <div content="created_at"></div>
           </div>
 
-          <div class="list animals"></div>
+          <div class="list events"></div>
 
           <div class="template">
             <div attr="_id">
-              <div content="_id"></div>
+              <div content="tag"></div>
               <div content="tag_number"></div>
               <div content="status"></div>
+              <div content="date_of_birth"></div>
             </div>
           </div>
 
@@ -74,14 +91,27 @@
           event_create
         </div>
 
-        <div display="animals">
-          <div class="template">
-            <div attr="_id" onclick="app.clickedAnimal(this)">
-              <div content="_id"></div>
-              <div content="tag_number"></div>
-              <div content="status"></div>
-            </div>
+        <div display="animals" class="listing">
+
+          <div class="top">
+            All animals
           </div>
+          <ul class="list">
+            
+          </ul>
+          <li class="template">
+            <div attr="_id" onclick="app.clickedAnimal(this)">
+              <div class="left">
+                <div class="name" content="tag"></div>
+                <div class="description" content="tag_number"></div>
+              </div>
+              <div class="right">
+                <div class="status" content="status"></div>
+                <div class="time" content="date_of_birth"></div>
+              </div>
+            </div>
+          </li>
+
         </div>
 
         <div display="animal_details">
@@ -108,6 +138,8 @@
       </section>
 
     </div>
+
+    <p id="lblError"></p>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="./js/app.js"></script>
