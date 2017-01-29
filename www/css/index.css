@@ -1,5 +1,5 @@
 * {
-  /*-webkit-tap-highlight-color: rgba(0,0,0,0);*/
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 html,
@@ -98,64 +98,97 @@ ul, li {
   list-style: none;
 }
 
-#app-bar {
-  height: auto;
-  background-color: #3747C3;
-  color: #fff;
-  position: relative;
-  width: 100%;
-  height: auto;
-  display: inline-block;
+.toast-message {
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.app-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  height: 55px;
+  background-color: #1D62F0;
+  background: linear-gradient(#34AADC, #1D62F0);
   box-shadow: 0 -4px 20px rgba(0,0,0,.8);
 }
+.app-bar-container.bar.context-bar {
+  z-index: 100;
+}
 
-#app-bar * {
+.app-bar {
+  height: auto;
+  color: #fff;
+  width: 100%;
+  height: 55px;
+  line-height: 55px;
+  text-align: middle; 
+  display: inline-block;
+}
+
+.app-bar * {
   position: relative;
   display: inline-block;
 }
 
-#app-bar > .title-container {
-
+.app-bar > .title-container {
+  
 }
 
-#app-bar > .title-container > i {
-  top: 7px;
+.app-bar > .title-container > i {
+  top: 1px;
   padding-left: 1rem;
 }
 
-#app-bar > .title-container > #title {
-  padding: 1rem 1rem;
+.app-bar > .title-container > span {
+  padding-left: 1rem;
 }
 
-#app-bar > .tabs-container {
+.app-bar > .tabs-container {
   float: right;
-  padding: 1rem 1rem;
+  padding: 0 1rem;
   padding-bottom: 0;
 }
 
-#app-bar > .tabs-container > #tabs {
+.app-bar > .tabs-container > #tabs {
   list-style: none;
+  font-size: 14px;
+  /*text-transform: uppercase;*/
 }
 
-#app-bar > .tabs-container > #tabs > li {
-  color: #D7D7D7;
+.app-bar > .tabs-container > #tabs > li {
+  color: #f1f1f1;
   margin-right: 1rem;
-  padding-bottom: 13px;
+  height: 53px;
+  box-sizing: content-box;
 }
-#app-bar > .tabs-container > #tabs > li:last-child {
-  padding-right: 0;
+.app-bar > .tabs-container > #tabs > li:last-child {
+  margin-right: 0;
 }
-#app-bar > .tabs-container > #tabs > li.selected {
+.app-bar > .tabs-container > #tabs > li.selected {
   color: #fff;
-  border-bottom: 3px solid #fff;
+  font-weight: 700;
+  border-bottom: 2px solid #fff;
 }
-#app-bar > .tabs-container > #tabs > li:active {
+.app-bar > .tabs-container > #tabs > li:active {
   background-color: transparent;
   outline: 0;
+}
+.app-bar .right {
+  float: right;
+  padding-right: 1rem;
+}
+.app-bar .right > * {
+  padding: 1rem;
 }
 
 #content {
   position: relative;
+  padding-top: 55px;
+  min-height: 100%;
+  min-height: 100vh;
 }
 
 #content > *[display] {
@@ -165,16 +198,16 @@ ul, li {
   display: block;
 }
 
-#content > *[display].listing {
-
-}
-
-#content > *[display].listing > .top {
+#content > *[display] > .top {
   padding: 1rem;
   font-size: 12px;
   color: #606060;
   background-color: #f7f7f7;
   margin-bottom: 1px;
+}
+
+#content > *[display].listing {
+
 }
 
 #content > *[display].listing > .list {
@@ -183,11 +216,14 @@ ul, li {
 
 #content > *[display].listing > .list > li {
   /*border-left: 3px solid #EC3E17;*/
-  padding: 1rem;
+  margin: 0 1rem;
   padding-bottom: 0;
-  margin-bottom: 1px;
   background-color: #fff;
   transition: background-color 150ms ease-in-out;
+  border-bottom: 1px solid #efefef;
+}
+#content > *[display].listing > .list > li:last-child {
+  border-bottom: none;
 }
 
 #content > *[display].listing > .list > li:active {
@@ -195,11 +231,9 @@ ul, li {
 }
 
 #content > *[display].listing > .list > li > div {
-  /*padding: 1rem;*/
-  padding-bottom: 1rem;
+  padding: 1rem 0;
   width: 100%;
   display: inline-block;
-  border-bottom: 1px solid #efefef;
 }
 
 #content > *[display].listing > .list > li > div .left {
@@ -209,7 +243,6 @@ ul, li {
 #content > *[display].listing > .list > li > div .right {
   width: 50%;
   float: left;
-  padding-right: 1rem;
 }
 
 #content > *[display].listing > .list > li > div .name {
@@ -235,4 +268,170 @@ ul, li {
   font-size: 12px;
   color: #606060;
   text-align: end;
+}
+
+#content > *[display="event_details"] {
+  
+}
+
+#content > *[display="animal_details"] > .details,
+#content > *[display="event_details"] > .details {
+  padding: 1rem;
+  padding-bottom: 0;
+}
+
+#content > *[display="animal_details"] > .details > div,
+#content > *[display="event_details"] > .details > div {
+  padding-bottom: 1rem;
+}
+
+#content > *[display="animal_details"] > .details > div > span,
+#content > *[display="event_details"] > .details > div > span {
+  display: block;
+}
+
+#content > *[display="animal_details"] > .details > div > .detail-type ,
+#content > *[display="event_details"] > .details > div > .detail-type {
+  font-size: 12px;
+  color: #606060;
+  padding-bottom: 0.2rem;
+}
+
+#content > *[display="scan"] > .list-heading,
+#content > *[display="animal_details"] > .list-heading,
+#content > *[display="event_details"] > .list-heading {
+  font-size: 12px;
+  color: #606060;
+  display: block;
+  padding: 0 1rem;
+  padding-bottom: 0.5rem;
+}
+
+#content > *[display="scan"] > .list,
+#content > *[display="animal_details"] > .list,
+#content > *[display="event_details"] > .list {
+  padding: 0 1rem;
+}
+
+#content > *[display="scan"] > .list > li,
+#content > *[display="animal_details"] > .list > li,
+#content > *[display="event_details"] > .list > li {
+  border-bottom: 1px solid #efefef;
+}
+#content > *[display="scan"] > .list > li:last-child,
+#content > *[display="animal_details"] > .list > li:last-child,
+#content > *[display="event_details"] > .list > li:last-child {
+  border-bottom: none;
+}
+#content > *[display="scan"] > .list > li > div,
+#content > *[display="animal_details"] > .list > li > div,
+#content > *[display="event_details"] > .list > li > div {
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  position: relative;
+  height: 3.5rem;
+}
+#content > *[display="scan"] > .list > li > div > .tag,
+#content > *[display="animal_details"] > .list > li > div > .title,
+#content > *[display="event_details"] > .list > li > div > .tag {
+  display: inline-block;
+  left: 1rem;
+  padding-bottom: 0.25rem;
+  position: absolute;
+}
+#content > *[display="scan"] > .list > li > div > .number,
+#content > *[display="animal_details"] > .list > li > div > .description,
+#content > *[display="event_details"] > .list > li > div > .number {
+  display: block;
+  font-size: 12px;
+  color: #606060;
+  display: block;
+  left: 1rem;
+  position: absolute;
+}
+
+#content > *[display="scan"] > .fab {
+  background-color: #973cd0;
+}
+
+#content > *[display="scan"] input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  height: 3rem;
+  width: 100%;
+  font-size: 1rem;
+  margin: 0 0 20px 0;
+  padding: 0;
+  box-shadow: none;
+  box-sizing: content-box;
+  transition: all 0.3s;
+}
+#content > *[display="scan"] input:focus {
+  border-bottom: 1px solid #FF9800;
+  box-shadow: 0 1px 0 0 #FF9800; 
+}
+
+#content > *[display="scan"] > .details {
+  padding: 1rem;
+}
+
+#content > *[display="scan"] > .details > span {
+  display: block;
+  font-size: 12px;
+  color: #606060;
+  display: block;
+}
+  
+
+
+#app[iOS] > .app-bar-container {
+  height: 75px;
+}
+#app[iOS] > .app-bar-container > * {
+  padding-top: 20px;
+}
+#app[iOS] > #content {
+  padding-top: 75px;
+}
+
+.fab {
+  border-radius: 50%;
+  height: 3.4rem;
+  width: 3.4rem;
+  color: #fff;
+  background-color: #ff4081;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 9;
+  text-align: center;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)
+}
+.fab:active {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4);
+}
+.fab > i {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 3.4rem;
+}
+
+#spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -1.75rem;
+  z-index: 999;
+  border-radius: 50%;
+  width: 3.4rem;
+  height: 3.4rem;
+  background-size: cover;
+  background-image: url("../img/loader.gif");
+  visibility: hidden;
+}
+#spinner.active {
+  visibility: visible;
 }

@@ -7,20 +7,35 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <!-- <link rel="stylesheet" type="text/css" href="css/index.css"> -->
     <title>AniTracker</title>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script
-      src="https://code.jquery.com/jquery-1.12.4.min.js"
-      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-      crossorigin="anonymous"
-    ></script>
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <script src="./js/toastr.min.js"></script>
+    <script type="text/javascript">
+      toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-bottom-full-width",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "4000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      }
+    </script>
     <script type="text/javascript">
     	(function() {
         window.addEventListener('error', function(error) {
           if (!error) return;
-          var lblError = document.querySelector('#lblError');
-          lblError.innerHTML = error.message + ' (' + error.filename + ':' + error.lineno + ':' + error.colno + ')';
-          console.log(error);
+          toastr.error(error.message + ' (' + error.filename + ':' + error.lineno + ':' + error.colno + ')');
         });
       }());
     </script>
@@ -29,17 +44,22 @@
 
     <div id="app">
 
-      <div id="app-bar">
-        <div class="title-container">
-          <!-- <i class="material-icons">keyboard_backspace</i> -->
-          <span id="title">AniTracker</span>
+      <div id="spinner"></div>
+
+      <div class="app-bar-container">
+        
+        <div class="app-bar">
+          <div class="title-container">
+            <span id="title">AniTracker</span>
+          </div>
+          <div class="tabs-container">
+            <ul id="tabs">
+              <li display="events" onclick="app.clickedTab(this)">Events</li>
+              <li display="animals" onclick="app.clickedTab(this)">Animals</li>
+            </ul>
+          </div>
         </div>
-        <div class="tabs-container">
-          <ul id="tabs">
-            <li display="events" onclick="app.clickedTab(this)">Events</li>
-            <li display="animals" onclick="app.clickedTab(this)">Animals</li>
-          </ul>
-        </div>
+
       </div>
       
       <section id="content">
@@ -49,7 +69,6 @@
             All events
           </div>
           <ul class="list">
-            
           </ul>
           <li class="template">
             <div attr="_id" onclick="app.clickedEvent(this)">
@@ -63,32 +82,47 @@
               </div>
             </div>
           </li>
+          <div class="fab" display="scan" onclick="app.clickedFab(this)">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </div>
         </div>
 
         <div display="event_details">
-
-          <div class="details">
-            <div content="jobtype"></div>
-            <div content="description"></div>
-            <div content="status"></div>
-            <div content="created_at"></div>
-          </div>
-
-          <div class="list events"></div>
-
-          <div class="template">
-            <div attr="_id">
-              <div content="tag"></div>
-              <div content="tag_number"></div>
-              <div content="status"></div>
-              <div content="date_of_birth"></div>
+          <div class="app-bar-container context-bar">
+            <div class="app-bar">
+              <div class="title-container" onclick="app.clickedTitle(this)">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                <span class="title">Event details</span>
+              </div>
             </div>
           </div>
-
-        </div>
-
-        <div display="event_create">
-          event_create
+          <div class="details">
+            <div>
+              <span class="detail-type">Title</span>
+              <span content="jobtype"></span>
+            </div>
+            <div>
+              <span class="detail-type">Description</span>
+              <span content="description"></span>
+            </div>
+            <div>
+              <span class="detail-type">Status</span>
+              <span content="status"></span>
+            </div>
+            <div>
+              <span class="detail-type">Created</span>
+              <span content="created_at"></span>
+            </div>
+          </div>
+          <span class="list-heading">Animals in event</span>
+          <ul class="list animals"></ul>
+          <li class="template">
+            <div attr="tag_number">
+              <i class="fa" aria-hidden="true">-</i>
+              <span class="tag" content="tag"></span>
+              <span class="number" content="tag_number"></span>
+            </div>
+          </li>
         </div>
 
         <div display="animals" class="listing">
@@ -116,23 +150,80 @@
 
         <div display="animal_details">
 
-          <div class="details">
-            <div content="tag_number"></div>
-            <div content="status"></div>
-            <div content="date_of_birth"></div>
-          </div>
-
-          <div class="list events"></div>
-
-          <div class="template">
-            <div attr="_id">
-              <div content="jobtype"></div>
-              <div content="description"></div>
-              <div content="status"></div>
-              <div content="created_at"></div>
+          <div class="app-bar-container context-bar">
+            <div class="app-bar">
+              <div class="title-container" onclick="app.clickedTitle(this)">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                <span class="title">Animal details</span>
+              </div>
             </div>
           </div>
 
+          <div class="details">
+            <div>
+              <span class="detail-type">Tag</span>
+              <span content="tag"></span>
+              <!-- <span content="tag_number"></span> -->
+            </div>
+            <div>
+              <span class="detail-type">Status</span>
+              <span content="status"></span>
+            </div>
+            <div>
+              <span class="detail-type">Status</span>
+              <span content="status"></span>
+            </div>
+            <div>
+              <span class="detail-type">Date of birth</span>
+              <span content="date_of_birth"></span>
+            </div>
+          </div>
+
+          <span class="list-heading">Events</span>
+          <ul class="list events"></ul>
+          <li class="template">
+            <div attr="id">
+              <i class="fa" aria-hidden="true">-</i>
+              <span class="title" content="jobtype"></span>
+              <span class="description" content="description"></span>
+            </div>
+          </li>
+
+        </div>
+
+        <div display="scan">
+
+          <div class="app-bar-container context-bar">
+            <div class="app-bar">
+              <div class="title-container" onclick="app.clickedTitle(this)">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                <span class="title">Create event</span>
+              </div>
+              <div class="right">
+                <!-- <i class="fa fa-check" aria-hidden="true"></i> -->
+                <i class="fa fa-paper-plane-o submit-button" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="details">
+            <span>Title</span>
+            <input tabindex="0" name="Title" class="input-title">
+            <span>Description</span>
+            <input tabindex="0" name="Description" class="input-description">
+          </div>
+          <span class="list-heading">Animals in event</span>
+          <ul class="list animals"></ul>
+          <li class="template">
+            <div attr="tag_number">
+              <i class="fa" aria-hidden="true">-</i>
+              <span class="tag" content="tag"></span>
+              <span class="number" content="tag_number"></span>
+            </div>
+          </li>
+          <div class="fab scan-button" display="scan">
+            <i class="fa fa-camera" aria-hidden="true"></i>
+          </div>
         </div>
 
       </section>
@@ -143,45 +234,5 @@
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="./js/app.js"></script>
-
-    <!-- <script type="text/javascript" src="js/index.js"></script> -->
-    <!-- <script type="text/javascript">
-      (function() {
-
-        var btnScan = document.querySelector('#btnScan');
-        btnScan.addEventListener('click', attemptScan);
-
-        var lblData = document.querySelector('#lblData');
-        var lblFormat = document.querySelector('#lblFormat');
-
-        function attemptScan() {
-
-          console.log('attemptScan');
-          var scan = cordova.plugins.barcodeScanner.scan;
-          var notify = navigator.notification.prompt;
-          var vibrate = navigator.vibrate;
-
-          var options = {
-            showFlipCameraButton : true,
-            showTorchButton : true,
-            resultDisplayDuration: 1,
-            prompt : "Place a tag inside the scan area",
-            formats : "DATA_MATRIX"
-          };
-
-          scan(function(result) {
-            console.log('scan', result);
-            if (result.cancelled) return;
-            lblData.innerHTML = result.text || null;
-            lblFormat.innerHTML = result.format || null;
-            vibrate(300);
-          }, function(error) {
-            console.error(error);
-          }, options);
-
-        }
-
-      }());
-    </script> -->
   </body>
 </html>
