@@ -387,10 +387,10 @@ ul, li {
   
 
 
-#app[iOS] > .app-bar-container {
+#app[iOS] .app-bar-container {
   height: 75px;
 }
-#app[iOS] > .app-bar-container > * {
+#app[iOS] .app-bar-container > * {
   padding-top: 20px;
 }
 #app[iOS] > #content {
